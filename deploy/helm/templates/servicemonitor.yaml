@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    name: missing-container-metrics
+    release: rancher-monitoring
+  name: missing-container-metrics
+spec:
+  endpoints:
+  - honorLabels: true
+    interval: 30s
+    metricRelabelings:
+    - action: keep
+      regex: container_ooms
+      sourceLabels:
+      - __name__
+    - action: labeldrop
+      regex: (container|container_id|container_short_id|docker_container_id|image_id)
+    path: /metrics
+    targetPort: 3001
+  namespaceSelector:
+    matchNames:
+    - cattle-monitoring-system
+  selector:
+    matchLabels:
+      app: missing-container-metrics
