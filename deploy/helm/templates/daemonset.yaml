@@ -2,31 +2,31 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   labels:
-    app.kubernetes.io/instance: missing-container-metrics
-    app.kubernetes.io/name: missing-container-metrics
-  name: missing-container-metrics
+    {{- include "oomkiller-monitor.labels" . | nindent 4 }}
+  name: {{ .Chart.Name }}
 spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app.kubernetes.io/instance: missing-container-metrics
-      app.kubernetes.io/name: missing-container-metrics
+      {{- include "oomkiller-monitor.selectorLabels" . | nindent 4 }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/instance: missing-container-metrics
-        app.kubernetes.io/name: missing-container-metrics
+        {{- include "oomkiller-monitor.labels" . | nindent 4 }}
     spec:
-      affinity: {}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
       - env:
         - name: DOCKER
           value: "true"
         - name: CONTAINERD
           value: "false"
-        image: dmilhdef/missing-container-metrics:v0.21.0
-        imagePullPolicy: IfNotPresent
-        name: missing-container-metrics
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        name: {{ .Chart.Name }}
         ports:
         - containerPort: 3001
           name: http
@@ -44,10 +44,11 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
       tolerations:
-      - effect: NoExecute
-        operator: Exists
-      - effect: NoSchedule
-        operator: Exists
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
       volumes:
       - hostPath:
           path: /var/run/docker.sock

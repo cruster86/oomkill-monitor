@@ -20,16 +20,15 @@ Common labels
 */}}
 {{- define "oomkiller-monitor.labels" -}}
 helm.sh/chart: {{ include "oomkiller-monitor.chart" . }}
+release: {{ .Release.Name }}
 {{ include "oomkiller-monitor.selectorLabels" . }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
+heritage: {{ .Release.Service }}
 {{- end }}
 
 {{/*
 Selector labels
 */}}
 {{- define "oomkiller-monitor.selectorLabels" -}}
-app: {{ include "oomkiller-monitor.name" . }}
-release: {{ .Release.Name }}
 app: {{ .Release.Name }}
 {{- end }}
 

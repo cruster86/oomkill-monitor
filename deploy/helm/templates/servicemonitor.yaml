@@ -2,9 +2,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    name: missing-container-metrics
-    release: rancher-monitoring
-  name: missing-container-metrics
+    {{- include "oomkiller-monitor.selectorLabels" . | nindent 4 }}
+    release: {{ .Values.servicemonitor.release }}
+  name: {{ .Chart.Name }}
 spec:
   endpoints:
   - honorLabels: true
@@ -17,10 +17,10 @@ spec:
     - action: labeldrop
       regex: (container|container_id|container_short_id|docker_container_id|image_id)
     path: /metrics
-    targetPort: 3001
+    targetPort: {{ .Values.service.port }}
   namespaceSelector:
     matchNames:
-    - cattle-monitoring-system
+    - {{ .Chart.Name }}
   selector:
     matchLabels:
-      app: missing-container-metrics
+      app: {{ .Chart.Name }}
