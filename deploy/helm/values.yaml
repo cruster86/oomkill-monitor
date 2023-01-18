@@ -4,7 +4,7 @@ imagePullSecrets:
   - name: sirius-registry
 
 image:
-  repository: dmilhdef/missing-container-metrics
+  repository: cr.yandex/crpcm9tg75s8gu2hqkp9/missing-container-metrics
   tag: v0.21.0
 
 tolerations:
