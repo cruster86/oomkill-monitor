@@ -8,11 +8,11 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      {{- include "oomkill-monitor.selectorLabels" . | nindent 4 }}
+      {{- include "oomkill-monitor.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "oomkill-monitor.labels" . | nindent 4 }}
+        {{- include "oomkill-monitor.labels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -41,7 +41,7 @@ spec:
       dnsPolicy: ClusterFirst
       {{- if .Values.nodeSelector }}
       nodeSelector:
-      {{ toYaml .Values.nodeSelector | indent 8 }}
+      {{ toYaml .Values.nodeSelector | indent 2 }}
       {{- end }}
       restartPolicy: Always
       schedulerName: default-scheduler
