@@ -1,3 +1,1 @@
-servicemonitor:
-  namespace: cattle-monitoring-system
-  release: rancher-monitoring
+nodeSelector: {}
