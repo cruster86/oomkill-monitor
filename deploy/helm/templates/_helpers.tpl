@@ -1,8 +1,8 @@
-{{- define "oomkiller-monitor.name" -}}
+{{- define "oomkill-monitor.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "oomkiller-monitor.fullname" -}}
+{{- define "oomkill-monitor.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -18,17 +18,17 @@
 {{/*
 Common labels
 */}}
-{{- define "oomkiller-monitor.labels" -}}
-helm.sh/chart: {{ include "oomkiller-monitor.chart" . }}
+{{- define "oomkill-monitor.labels" -}}
+helm.sh/chart: {{ include "oomkill-monitor.chart" . }}
 release: {{ .Release.Name }}
-{{ include "oomkiller-monitor.selectorLabels" . }}
+{{ include "oomkill-monitor.selectorLabels" . }}
 heritage: {{ .Release.Service }}
 {{- end }}
 
 {{/*
 Selector labels
 */}}
-{{- define "oomkiller-monitor.selectorLabels" -}}
+{{- define "oomkill-monitor.selectorLabels" -}}
 app: {{ .Release.Name }}
 {{- end }}
 
