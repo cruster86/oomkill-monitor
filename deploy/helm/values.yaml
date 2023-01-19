@@ -7,6 +7,8 @@ image:
   repository: cr.yandex/crpcm9tg75s8gu2hqkp9/missing-container-metrics
   tag: v0.21.0
 
+nodeSelector: {}
+
 tolerations:
   - effect: NoExecute
     operator: Exists

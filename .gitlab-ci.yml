@@ -1,0 +1,80 @@
+stages:
+  - cpm-dev-deploy
+  - cpm-yc-deploy
+  - corp-deploy
+  - univ-deploy
+  - sirius-deploy
+
+.base-oomkill-monitor:
+  when: manual
+  before_script:
+    - echo 'Deploy parameters:'
+    - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
+  script:
+    - set -x
+    - kubectl get ns oomkill-monitor || kubectl create ns oomkill-monitor
+    - chmod +x ./scripts/helm_deploy_and_wait.sh
+    - RELEASE_NAME="oomkill-monitor"
+      NAMESPACE="oomkill-monitor"
+      CHART="deploy/helm
+      HELM_ARGS="
+      -f deploy/helm/conf/${CLUSTER_NAME}/values.yaml
+      --set global.secret="${YC_REGISTRY}"
+      --atomic
+      --wait"
+      ./scripts/helm_deploy_and_wait.sh
+
+############  CPM-DEV  ############
+
+cpm-dev oomkill-monitor deploy:
+  extends:
+    - .base-oomkill-monitor
+  stage: cpm-dev-deploy
+  variables:
+    CLUSTER_NAME: "cpm-dev"
+  tags:
+    - kube-cpm
+
+############  CPM-YC  ############
+
+#cpm-yc oomkill-monitor deploy:
+#  extends:
+#    - .base-oomkill-monitor
+#  stage: cpm-yc-deploy
+#  variables:
+#    CLUSTER_NAME: "cpm"
+#  tags:
+#    - cpm-yac
+
+############  CORP  ############
+
+#corp oomkill-monitor deploy:
+#  extends:
+#    - .base-oomkill-monitor
+#  stage: corp-deploy
+#  variables:
+#    CLUSTER_NAME: "corp"
+#  tags:
+#    - kube-corp
+
+############  UNIV  ############
+
+#univ oomkill-monitor deploy:
+#  extends:
+#    - .base-oomkill-monitor
+#  stage: univ-deploy
+#  variables:
+#    CLUSTER_NAME: "univ"
+#  tags:
+#    - kube-univ
+
+############  SIRIUS  ############
+
+#sirius oomkill-monitor deploy:
+#  extends:
+#    - .base-oomkill-monitor
+#  stage: sirius-deploy
+#  variables:
+#    CLUSTER_NAME: "sirius"
+#  tags:
+#    - kube-ci

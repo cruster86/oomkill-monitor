@@ -39,6 +39,10 @@ spec:
         - mountPath: /var/run/docker.sock
           name: dockersock
       dnsPolicy: ClusterFirst
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+      {{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end }}
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}

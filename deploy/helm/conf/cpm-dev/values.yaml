@@ -1,2 +1,5 @@
 servicemonitor:
   release: rancher-monitoring
+
+nodeSelector:
+  kubernetes.io/hostname: ts-monitoring
