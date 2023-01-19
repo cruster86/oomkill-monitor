@@ -28,7 +28,7 @@ spec:
         imagePullPolicy: {{ .Values.imagePullPolicy }}
         name: {{ .Chart.Name }}
         ports:
-        - containerPort: 3001
+        - containerPort: {{ .Values.service.port }}
           name: http
           protocol: TCP
         resources: {}
@@ -43,9 +43,6 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-      tolerations:
-      nodeSelector:
-        {{- toYaml .Values.nodeSelector | nindent 8 }}
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
