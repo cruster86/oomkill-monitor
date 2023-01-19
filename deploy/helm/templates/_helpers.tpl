@@ -19,7 +19,6 @@
 Common labels
 */}}
 {{- define "oomkill-monitor.labels" -}}
-helm.sh/chart: {{ include "oomkill-monitor.chart" . }}
 release: {{ .Release.Name }}
 {{ include "oomkill-monitor.selectorLabels" . }}
 heritage: {{ .Release.Service }}
