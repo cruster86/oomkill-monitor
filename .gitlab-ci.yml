@@ -48,14 +48,14 @@ cpm-dev oomkill-monitor deploy:
 
 ############  CORP  ############
 
-#corp oomkill-monitor deploy:
-#  extends:
-#    - .base-oomkill-monitor
-#  stage: corp-deploy
-#  variables:
-#    CLUSTER_NAME: "corp"
-#  tags:
-#    - kube-corp
+corp oomkill-monitor deploy:
+  extends:
+    - .base-oomkill-monitor
+  stage: corp-deploy
+  variables:
+    CLUSTER_NAME: "corp"
+  tags:
+    - kube-corp
 
 ############  UNIV  ############
 
