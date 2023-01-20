@@ -1,1 +1,33 @@
 nodeSelector: {}
+
+managedServiceAccount: true
+
+serviceAccountAnnotations: {}
+
+clusterRoleRules:
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+      - nodes
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - "apps"
+    resources:
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resourceNames:
+      - oomkill-monitor-psp
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
