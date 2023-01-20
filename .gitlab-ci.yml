@@ -37,14 +37,14 @@ cpm-dev oomkill-monitor deploy:
 
 ############  CPM-YC  ############
 
-#cpm-yc oomkill-monitor deploy:
-#  extends:
-#    - .base-oomkill-monitor
-#  stage: cpm-yc-deploy
-#  variables:
-#    CLUSTER_NAME: "cpm"
-#  tags:
-#    - cpm-yac
+cpm-yc oomkill-monitor deploy:
+  extends:
+    - .base-oomkill-monitor
+  stage: cpm-yc-deploy
+  variables:
+    CLUSTER_NAME: "cpm"
+  tags:
+    - cpm-yac
 
 ############  CORP  ############
 
@@ -59,22 +59,22 @@ corp oomkill-monitor deploy:
 
 ############  UNIV  ############
 
-#univ oomkill-monitor deploy:
-#  extends:
-#    - .base-oomkill-monitor
-#  stage: univ-deploy
-#  variables:
-#    CLUSTER_NAME: "univ"
-#  tags:
-#    - kube-univ
+univ oomkill-monitor deploy:
+  extends:
+    - .base-oomkill-monitor
+  stage: univ-deploy
+  variables:
+    CLUSTER_NAME: "univ"
+  tags:
+    - kube-univ
 
 ############  SIRIUS  ############
 
-#sirius oomkill-monitor deploy:
-#  extends:
-#    - .base-oomkill-monitor
-#  stage: sirius-deploy
-#  variables:
-#    CLUSTER_NAME: "sirius"
-#  tags:
-#    - kube-ci
+sirius oomkill-monitor deploy:
+  extends:
+    - .base-oomkill-monitor
+  stage: sirius-deploy
+  variables:
+    CLUSTER_NAME: "sirius"
+  tags:
+    - kube-ci
