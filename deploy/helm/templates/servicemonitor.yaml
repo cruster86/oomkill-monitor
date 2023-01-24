@@ -5,7 +5,7 @@ metadata:
     {{- include "oomkill-monitor.selectorLabels" . | nindent 4 }}
     release: {{ .Values.servicemonitor.release }}
   name: {{ .Chart.Name }}
-  namespace: {{ .Values.namespace | default .Release.Namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   endpoints:
   - honorLabels: true
