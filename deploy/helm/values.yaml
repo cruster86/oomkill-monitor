@@ -2,9 +2,11 @@ imagePullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: sirius-registry
+  - name: gitlab-registry
 
 image:
-  repository: cr.yandex/crpcm9tg75s8gu2hqkp9/missing-container-metrics
+  #repository: cr.yandex/crpcm9tg75s8gu2hqkp9/missing-container-metrics
+  repository: registry.sirius.online/infra/oomkill-monitor/missing-container-metrics
   tag: v0.21.0
 
 nodeSelector: {}
