@@ -1,6 +1,7 @@
 ### Структура репозитория
-Настройки проектов находятся в `helm/conf/${CLUSTER}/values.yaml`
 
-Описание deploy находится в `.gitlab-ci.yaml`
+Настройки для кластеров находятся в: `helm/conf/${CLUSTER}/values.yaml`
 
-Оригинальный проект: https://github.com/draganm/missing-container-metrics
+Конфигурация деплоя находится в: `.gitlab-ci.yaml`
+
+Upstream проект: https://github.com/draganm/missing-container-metrics

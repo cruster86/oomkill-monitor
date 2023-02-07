@@ -1,3 +1,5 @@
+### values specific for sirius cluster
+
 managedServiceAccount: true
 
 clusterRoleRules:
