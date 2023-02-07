@@ -1,8 +1,4 @@
-nodeSelector: {}
-
 managedServiceAccount: true
-
-serviceAccountAnnotations: {}
 
 clusterRoleRules:
   - apiGroups:
