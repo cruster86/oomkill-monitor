@@ -6,7 +6,7 @@
 
 Особенности установки:
 
-  - Для кластера Sirius необходимо включит создание psp-конфигурации: ```managedServiceAccount: true``` Она передаётся в правила для ClusterRole через праметр clusterRoleRules.
+  - Для кластера Sirius необходимо включить создание psp-конфигурации: ```managedServiceAccount: true``` Она передаётся в правила для ClusterRole через праметр clusterRoleRules.
 
 ---
 
