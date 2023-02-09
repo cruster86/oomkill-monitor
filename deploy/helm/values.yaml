@@ -1,29 +1,37 @@
+# Политика загрузки образа
 imagePullPolicy: IfNotPresent
 
+# Имя образа и тэг-версия
+image:
+  repository: registry.sirius.online/infra/oomkill-monitor/missing-container-metrics
+  tag: v0.21.0
+
+# Секреты для доступа к реджисти с образом
 imagePullSecrets:
   - name: sirius-registry
   - name: gitlab-registry
 
-image:
-  #repository: cr.yandex/crpcm9tg75s8gu2hqkp9/missing-container-metrics
-  repository: registry.sirius.online/infra/oomkill-monitor/missing-container-metrics
-  tag: v0.21.0
-
+# Механизм выбора нод для установки
 nodeSelector: {}
 
+# 
 tolerations:
   - effect: NoExecute
     operator: Exists
   - effect: NoSchedule
     operator: Exists
 
+# Настройки сервиса
 service:
   type: ClusterIP
   port: 3001
 
+# Настройки сервиссмонитора
 servicemonitor:
   release: rancher-monitoring
 
+# Инициация создания RBAC конфигураций
 managedServiceAccount: false
 
+# Дополнительные аннтоации к сервисному аккаунту
 serviceAccountAnnotations: {}
