@@ -14,7 +14,7 @@ imagePullSecrets:
 # Механизм выбора нод для установки
 nodeSelector: {}
 
-# 
+# Настройка невосприимчивости к теинтам нодж
 tolerations:
   - effect: NoExecute
     operator: Exists
