@@ -1,9 +1,8 @@
 stages:
-  - cpm-dev-deploy
-  - cpm-yc-deploy
-  - corp-deploy
-  - univ-deploy
-  - sirius-deploy
+  - cpm
+  - corp
+  - univ
+  - sirius
 
 .base-oomkill-monitor:
   when: manual
@@ -11,7 +10,6 @@ stages:
     - echo 'Deploy parameters:'
     - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
   script:
-    - set -x
     - kubectl get ns oomkill-monitor || kubectl create ns oomkill-monitor
     - chmod +x ./scripts/helm_deploy_and_wait.sh
     - RELEASE_NAME="oomkill-monitor"
@@ -27,10 +25,10 @@ stages:
 
 ############  CPM-DEV  ############
 
-cpm-dev oomkill-monitor deploy:
+cpm oomkill-monitor stage:
   extends:
     - .base-oomkill-monitor
-  stage: cpm-dev-deploy
+  stage: cpm
   variables:
     CLUSTER_NAME: "cpm-dev"
   tags:
@@ -38,10 +36,10 @@ cpm-dev oomkill-monitor deploy:
 
 ############  CPM-YC  ############
 
-cpm-yc oomkill-monitor deploy:
+cpm oomkill-monitor prod:
   extends:
     - .base-oomkill-monitor
-  stage: cpm-yc-deploy
+  stage: cpm
   variables:
     CLUSTER_NAME: "cpm"
   tags:
@@ -49,10 +47,10 @@ cpm-yc oomkill-monitor deploy:
 
 ############  CORP  ############
 
-corp oomkill-monitor deploy:
+corp oomkill-monitor prod:
   extends:
     - .base-oomkill-monitor
-  stage: corp-deploy
+  stage: corp
   variables:
     CLUSTER_NAME: "corp"
   tags:
@@ -60,10 +58,10 @@ corp oomkill-monitor deploy:
 
 ############  UNIV  ############
 
-univ oomkill-monitor deploy:
+univ oomkill-monitor prod:
   extends:
     - .base-oomkill-monitor
-  stage: univ-deploy
+  stage: univ
   variables:
     CLUSTER_NAME: "univ"
   tags:
@@ -71,10 +69,10 @@ univ oomkill-monitor deploy:
 
 ############  SIRIUS  ############
 
-sirius oomkill-monitor deploy:
+sirius oomkill-monitor prod:
   extends:
     - .base-oomkill-monitor
-  stage: sirius-deploy
+  stage: sirius
   variables:
     CLUSTER_NAME: "sirius"
   tags:
