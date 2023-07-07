@@ -11,6 +11,10 @@ spec:
       {{- include "oomkill-monitor.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "oomkill-monitor.labels" . | nindent 8 }}
     spec:
@@ -20,10 +24,18 @@ spec:
       {{- end }}
       containers:
       - env:
-        - name: DOCKER
-          value: "true"
-        - name: CONTAINERD
-          value: "false"
+          - name: DOCKER
+        {{- if .Values.useDocker}}
+            value: "true"
+        {{- else }}
+            value: "false"
+        {{- end }}
+          - name: CONTAINERD
+        {{- if .Values.useContainerd}}
+            value: "true"
+        {{- else }}
+            value: "false"
+        {{- end }}
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.imagePullPolicy }}
         name: {{ .Chart.Name }}
@@ -32,12 +44,19 @@ spec:
           name: http
           protocol: TCP
         resources: {}
-        securityContext: {}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
-        - mountPath: /var/run/docker.sock
-          name: dockersock
+        {{- if .Values.useDocker}}
+        - name: dockersock
+          mountPath: /var/run/docker.sock
+        {{- end }}
+        {{- if .Values.useContainerd}}
+        - name: containerdsock
+          mountPath: /run/containerd/containerd.sock
+        {{- end}}
       dnsPolicy: ClusterFirst
       {{- if .Values.nodeSelector }}
       nodeSelector:
@@ -52,12 +71,17 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
       volumes:
-      - hostPath:
+      {{- if .Values.useDocker}}
+      - name: dockersock
+        hostPath:
           path: /var/run/docker.sock
-          type: ""
-        name: dockersock
+      {{- end }}
+      {{- if .Values.useContainerd}}
+      - name: containerdsock
+        hostPath:
+          path: /run/containerd/containerd.sock
+      {{- end }}
   updateStrategy:
     rollingUpdate:
       maxUnavailable: 1
     type: RollingUpdate
-
