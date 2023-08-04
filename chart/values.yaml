@@ -27,7 +27,7 @@ service:
   port: 3001
 
 # Настройки сервиссмонитора
-servicemonitor:
+serviceMonitor:
   enabled: true
   release: rancher-monitoring
 
