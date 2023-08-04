@@ -28,6 +28,7 @@ service:
 
 # Настройки сервиссмонитора
 servicemonitor:
+  enabled: true
   release: rancher-monitoring
 
 # Инициация создания RBAC конфигураций
