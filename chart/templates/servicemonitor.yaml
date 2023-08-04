@@ -4,7 +4,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     {{- include "oomkill-monitor.selectorLabels" . | nindent 4 }}
-    release: {{ .Values.servicemonitor.release }}
+    release: {{ .Values.serviceMonitor.release }}
   name: {{ .Chart.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
