@@ -1,8 +1,8 @@
 stages:
-  - cpm
   - corp
   - univ
   - sirius
+#  - cpm
 
 .base-oomkill-monitor:
   when: manual
@@ -25,25 +25,25 @@ stages:
 
 ############  CPM-DEV  ############
 
-cpm oomkill-monitor stage:
-  extends:
-    - .base-oomkill-monitor
-  stage: cpm
-  variables:
-    CLUSTER_NAME: "cpm-dev"
-  tags:
-    - kube-cpm
+#cpm oomkill-monitor stage:
+#  extends:
+#    - .base-oomkill-monitor
+#  stage: cpm
+#  variables:
+#    CLUSTER_NAME: "cpm-dev"
+#  tags:
+#    - kube-cpm
 
 ############  CPM-YC  ############
 
-cpm oomkill-monitor prod:
-  extends:
-    - .base-oomkill-monitor
-  stage: cpm
-  variables:
-    CLUSTER_NAME: "cpm"
-  tags:
-    - cpm-yac
+#cpm oomkill-monitor prod:
+#  extends:
+#    - .base-oomkill-monitor
+#  stage: cpm
+#  variables:
+#    CLUSTER_NAME: "cpm"
+#  tags:
+#    - cpm-yac
 
 ############  CORP  ############
 
