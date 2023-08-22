@@ -63,3 +63,7 @@ resources: {}
 useDocker: true
 
 useContainerd: false
+
+# Включаем ли мы секреты
+secrets:
+  enabled: true
