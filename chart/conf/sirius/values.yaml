@@ -31,3 +31,11 @@ clusterRoleRules:
       - podsecuritypolicies
     verbs:
       - use
+
+imagePullSecrets:
+  - name: sirius-registry
+  - name: gitlab-registry
+
+# Включаем ли мы секреты
+secrets:
+  enabled: true

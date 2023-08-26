@@ -7,10 +7,7 @@ image:
   tag: v0.21.0
 
 # Секреты для доступа к реджисти с образом
-imagePullSecrets:
-  - name: sirius-registry
-  - name: gitlab-registry
-
+imagePullSecrets: []
 # Механизм выбора нод для установки
 nodeSelector: {}
 
@@ -66,4 +63,4 @@ useContainerd: false
 
 # Включаем ли мы секреты
 secrets:
-  enabled: true
+  enabled: false
