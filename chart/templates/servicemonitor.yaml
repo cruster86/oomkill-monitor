@@ -22,7 +22,7 @@ spec:
     targetPort: {{ .Values.service.port }}
   namespaceSelector:
     matchNames:
-    - {{ .Chart.Name }}
+    - {{ .Release.Namespace }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
