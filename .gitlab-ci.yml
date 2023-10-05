@@ -2,7 +2,6 @@ stages:
   - corp
   - univ
   - sirius
-#  - cpm
 
 .base-oomkill-monitor:
   when: manual
@@ -22,30 +21,6 @@ stages:
       --atomic
       --wait"
       ./scripts/helm_deploy_and_wait.sh
-
-############  CPM-DEV  ############
-
-#cpm oomkill-monitor stage:
-#  extends:
-#    - .base-oomkill-monitor
-#  stage: cpm
-#  variables:
-#    CLUSTER_NAME: "cpm-dev"
-#  tags:
-#    - kube-cpm
-
-############  CPM-YC  ############
-
-#cpm oomkill-monitor prod:
-#  extends:
-#    - .base-oomkill-monitor
-#  stage: cpm
-#  variables:
-#    CLUSTER_NAME: "cpm"
-#  tags:
-#    - cpm-yac
-
-############  CORP  ############
 
 corp oomkill-monitor prod:
   extends:
