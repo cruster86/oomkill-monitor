@@ -1,5 +1,4 @@
 stages:
-  - corp
   - univ
   - sirius
 
@@ -21,15 +20,6 @@ stages:
       --atomic
       --wait"
       ./scripts/helm_deploy_and_wait.sh
-
-corp oomkill-monitor prod:
-  extends:
-    - .base-oomkill-monitor
-  stage: corp
-  variables:
-    CLUSTER_NAME: "corp"
-  tags:
-    - kube-corp
 
 ############  UNIV  ############
 
