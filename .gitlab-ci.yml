@@ -1,6 +1,6 @@
 stages:
-  - univ
   - sirius
+  - univ
 
 .base-oomkill-monitor:
   when: manual
@@ -21,17 +21,6 @@ stages:
       --wait"
       ./scripts/helm_deploy_and_wait.sh
 
-############  UNIV  ############
-
-univ oomkill-monitor prod:
-  extends:
-    - .base-oomkill-monitor
-  stage: univ
-  variables:
-    CLUSTER_NAME: "univ"
-  tags:
-    - kube-univ
-
 ############  SIRIUS  ############
 
 sirius oomkill-monitor prod:
@@ -42,3 +31,14 @@ sirius oomkill-monitor prod:
     CLUSTER_NAME: "sirius"
   tags:
     - kube-ci
+
+############  UNIV  ############
+
+univ oomkill-monitor prod:
+  extends:
+    - .base-oomkill-monitor
+  stage: univ
+  variables:
+    CLUSTER_NAME: "univ"
+  tags:
+    - kube-univ
