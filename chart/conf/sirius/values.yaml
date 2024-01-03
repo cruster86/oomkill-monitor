@@ -33,8 +33,7 @@ clusterRoleRules:
       - use
 
 imagePullSecrets:
-  - name: sirius-registry
-  - name: gitlab-registry
+  - name: infra-registry
 
 # Включаем ли мы секреты
 secrets:
