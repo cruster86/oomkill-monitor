@@ -1,6 +1,5 @@
 stages:
   - sirius
-  - univ
 
 .base-oomkill-monitor:
   when: manual
@@ -8,17 +7,15 @@ stages:
     - echo 'Deploy parameters:'
     - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
   script:
-    - kubectl get ns oomkill-monitor || kubectl create ns oomkill-monitor
     - chmod +x ./scripts/helm_deploy_and_wait.sh
     - RELEASE_NAME="oomkill-monitor"
       NAMESPACE="oomkill-monitor"
       CHART="chart"
       HELM_ARGS="
-      -f deploy/helm/conf/${CLUSTER_NAME}/values.yaml
+      -f chart/conf/${CLUSTER_NAME}/values.yaml
       --set global.yc_secret="${YC_REGISTRY}"
       --set global.gitlab_secret="${INFRA_REGISTRY}"
-      --atomic
-      --wait"
+      --debug"
       ./scripts/helm_deploy_and_wait.sh
 
 ############  SIRIUS  ############
@@ -31,14 +28,3 @@ sirius oomkill-monitor prod:
     CLUSTER_NAME: "sirius"
   tags:
     - kube-ci
-
-############  UNIV  ############
-
-univ oomkill-monitor prod:
-  extends:
-    - .base-oomkill-monitor
-  stage: univ
-  variables:
-    CLUSTER_NAME: "univ"
-  tags:
-    - kube-univ
