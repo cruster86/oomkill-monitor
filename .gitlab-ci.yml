@@ -5,7 +5,7 @@ helm-package-publish:
   when: manual
   stage: package-publish
   image:
-    name: alpine/helm:3.12.3
+    name: registry.sirius.online/infra/images/helm:3.12.3
     entrypoint: [""]
   tags: 
     - corp-docker
