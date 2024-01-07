@@ -1,30 +1,29 @@
 stages:
-  - sirius
+  - package-publish
 
-.base-oomkill-monitor:
+helm-package-publish:
   when: manual
+  stage: package-publish
+  image:
+    name: alpine/helm:3.12.3
+    entrypoint: [""]
+  tags: 
+    - corp-docker
   before_script:
-    - echo 'Deploy parameters:'
-    - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
+    - set -x
+    - apk update && apk add git
+    - helm plugin install https://github.com/chartmuseum/helm-push
+    - >
+      helm repo add oomkill-monitor
+      --username ${CI_REGISTRY_USER}
+      --password ${CI_REGISTRY_PASSWORD}
+      ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/helm/stable
+    - helm repo list
   script:
-    - chmod +x ./scripts/helm_deploy_and_wait.sh
-    - RELEASE_NAME="oomkill-monitor"
-      NAMESPACE="oomkill-monitor"
-      CHART="chart"
-      HELM_ARGS="
-      -f chart/conf/${CLUSTER_NAME}/values.yaml
-      --set global.yc_secret="${YC_REGISTRY}"
-      --set global.gitlab_secret="${INFRA_REGISTRY}"
-      --debug"
-      ./scripts/helm_deploy_and_wait.sh
-
-############  SIRIUS  ############
-
-sirius oomkill-monitor prod:
-  extends:
-    - .base-oomkill-monitor
-  stage: sirius
-  variables:
-    CLUSTER_NAME: "sirius"
-  tags:
-    - kube-ci
+    - helm package chart
+    - helm cm-push oomkill-monitor*.tgz oomkill-monitor
+#  only:
+#    refs:
+#      - main
+#    changes:
+#      - chart/**/*
