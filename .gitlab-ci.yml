@@ -24,7 +24,7 @@ helm-package-publish:
   script:
     - helm package charts/oomkill-monitor
     - helm cm-push oomkill-monitor*.tgz oomkill-monitor
-    - helm search oomkill-monitor
+    - helm search repo oomkill-monitor
 #  only:
 #    refs:
 #      - main
