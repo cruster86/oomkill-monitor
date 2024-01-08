@@ -1,29 +1,31 @@
-# Политика загрузки образа
+# Политика загрузки образа:
 imagePullPolicy: IfNotPresent
 
-# Имя образа и тэг-версия
+# Имя образа и тэг-версия:
 image:
   repository: registry.sirius.online/infra/oomkill-monitor/missing-container-metrics
   tag: v0.21.0
 
-# Секреты для доступа к реджисти с образом
-imagePullSecrets: []
-# Механизм выбора нод для установки
+# Секреты для доступа к реджисти с образом:
+imagePullSecrets:
+  - name: infra-registry
+
+# Механизм выбора нод для установки (по-умолчанию установка на все ноды кластера)
 nodeSelector: {}
 
-# Настройка невосприимчивости к теинтам нодж
+# Настройка невосприимчивости к теинтам нод:
 tolerations:
   - effect: NoExecute
     operator: Exists
   - effect: NoSchedule
     operator: Exists
 
-# Настройки сервиса
+# Настройки сервиса:
 service:
   type: ClusterIP
   port: 3001
 
-# Настройки сервиссмонитора
+# Настройки сервиссмонитора:
 serviceMonitor:
   enabled: true
   release: rancher-monitoring
@@ -31,16 +33,19 @@ serviceMonitor:
 # Инициация создания RBAC конфигураций
 managedServiceAccount: false
 
-# Дополнительные аннтоации к сервисному аккаунту
+# Дополнительные аннтоации к сервисному аккаунту:
 serviceAccountAnnotations: {}
 
+# Дополнительные аннтоации для подов:
 podAnnotations: {}
 #  prometheus.io/scrape: "true"
 #  prometheus.io/port: "3001"
 
+# Настройки безопасности для подов:
 podSecurityContext: {}
   # fsGroup: 2000
 
+# Настройки безопасности для подов:
 securityContext: {}
   # capabilities:
   #   drop:
@@ -49,6 +54,7 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+# Выдача ресурсов для подов:
 resources: {}
   # limits:
   #   cpu: 100m
@@ -57,10 +63,10 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+# Выбор типа контейнеризации:
 useDocker: true
-
 useContainerd: false
 
-# Включаем ли мы секреты
+# Включаем ли мы секреты:
 secrets:
   enabled: false

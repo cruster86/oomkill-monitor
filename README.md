@@ -1,12 +1,11 @@
-### Структура репозитория
-
-Настройки для кластеров находятся в: `helm/conf/${CLUSTER_NAME}/values.yaml`
-
-Конфигурация деплоя находится в: `.gitlab-ci.yaml`
-
 Особенности установки:
 
-  - Для кластера Sirius необходимо включить создание psp-конфигурации: `managedServiceAccount: true`. Она передаётся в правила для ClusterRole через праметр clusterRoleRules.
+  - Для кластера Sirius необходимо включить создание psp-конфигурации: `managedServiceAccount: true`.
+    Она передаётся в правила для ClusterRole через праметр clusterRoleRules.
+
+  - Тип контейнеризации задаётся с помощью параметров:
+    `useDocker: true/false`
+    `useContainerd: true/false`
 
 ---
 
