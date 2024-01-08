@@ -15,7 +15,7 @@ helm-package-publish:
   before_script:
     - set -x
     - apk update && apk add git curl --no-cache
-    - helm plugin install https://github.com/chartmuseum/helm-push
+#    - helm plugin install https://github.com/chartmuseum/helm-push
     - >
       helm repo add oomkill-monitor
       --username ${CI_REGISTRY_USER}
@@ -23,6 +23,7 @@ helm-package-publish:
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/helm/stable
   script:
     - helm package charts/oomkill-monitor
+    - ls -la
     - >
       curl --request POST
       --form 'chart=@oomkill-monitor-1.0.0.tgz'
