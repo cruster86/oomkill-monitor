@@ -23,7 +23,12 @@ helm-package-publish:
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/helm/stable
   script:
     - helm package charts/oomkill-monitor
-    - helm cm-push oomkill-monitor*.tgz oomkill-monitor
+    - >
+    curl --request POST
+     --form 'chart=@oomkill-monitor*.tgz'
+     --user zerodistance:glpat-dxTFQxAzC1PJV-3Ec62y
+     https://gitlab.example.com/api/v4/projects/<project_id>/packages/helm/api/stable/charts
+#    - helm cm-push oomkill-monitor*.tgz oomkill-monitor
     - helm search repo oomkill-monitor
 #  only:
 #    refs:
