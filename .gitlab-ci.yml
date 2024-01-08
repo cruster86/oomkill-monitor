@@ -14,7 +14,7 @@ helm-package-publish:
     CHART: oomkill-monitor
   before_script:
     - set -x
-    - apk update && apk add git --no-cache
+    - apk update && apk add git curl --no-cache
     - helm plugin install https://github.com/chartmuseum/helm-push
     - >
       helm repo add oomkill-monitor
@@ -25,7 +25,7 @@ helm-package-publish:
     - helm package charts/oomkill-monitor
     - >
       curl --request POST
-      --form 'chart=@oomkill-monitor*.tgz'
+      --form 'chart=@oomkill-monitor-1.0.0.tgz'
       --user zerodistance:glpat-dxTFQxAzC1PJV-3Ec62y
       https://gitlab.sirius.online/api/v4/projects/176/packages/helm/api/stable/charts
 #    - helm cm-push oomkill-monitor*.tgz oomkill-monitor
