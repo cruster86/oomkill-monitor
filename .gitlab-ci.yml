@@ -27,7 +27,7 @@ helm-package-publish:
       curl --request POST
       --form 'chart=@oomkill-monitor-1.0.0.tgz'
       --user zerodistance:glpat-dxTFQxAzC1PJV-3Ec62y
-      https://gitlab.sirius.online/api/v4/projects/176/packages/helm/api/stable/charts
+      https://gitlab.sirius.online/api/v4/projects/176/packages/helm/api/stable
 #    - helm cm-push oomkill-monitor*.tgz oomkill-monitor
     - helm search repo oomkill-monitor
 #  only:
