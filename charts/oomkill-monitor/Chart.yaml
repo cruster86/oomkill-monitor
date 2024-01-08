@@ -3,4 +3,3 @@ description: Exposes metrics about Docker/Containerd containers. Each of those m
 name: oomkill-monitor
 version: 1.0.0
 appVersion: v0.21.0
-
