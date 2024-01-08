@@ -24,10 +24,10 @@ helm-package-publish:
   script:
     - helm package charts/oomkill-monitor
     - >
-    curl --request POST
-     --form 'chart=@oomkill-monitor*.tgz'
-     --user zerodistance:glpat-dxTFQxAzC1PJV-3Ec62y
-     https://gitlab.example.com/api/v4/projects/<project_id>/packages/helm/api/stable/charts
+      curl --request POST
+      --form 'chart=@oomkill-monitor*.tgz'
+      --user zerodistance:glpat-dxTFQxAzC1PJV-3Ec62y
+      https://gitlab.example.com/api/v4/projects/<project_id>/packages/helm/api/stable/charts
 #    - helm cm-push oomkill-monitor*.tgz oomkill-monitor
     - helm search repo oomkill-monitor
 #  only:
