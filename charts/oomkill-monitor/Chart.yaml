@@ -1,5 +1,5 @@
 apiVersion: v1
-description: Exposes metrics about Docker/Containerd containers.
+description: "Exposes metrics about Docker/Containerd containers."
 name: oomkill-monitor
 type: application
 version: 1.0.0
