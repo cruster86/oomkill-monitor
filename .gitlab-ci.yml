@@ -1,0 +1,13 @@
+stages:
+  - build_push
+
+prepare_image:
+  stage: build_push
+  when: manual
+  tags:
+    - robot
+  script:
+    - set -x
+    - docker login "${CI_REGISTRY}" -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}"
+    - cd source && docker build --no-cache -t registry.sirius.online/infra/oomkill-monitor/missing-container-metrics:v0.22.0 .
+    - docker push registry.sirius.online/infra/oomkill-monitor/missing-container-metrics:v0.22.0
