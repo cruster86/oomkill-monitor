@@ -4,7 +4,7 @@ imagePullPolicy: IfNotPresent
 # Имя образа и тэг-версия:
 image:
   repository: registry.sirius.online/infra/oomkill-monitor/missing-container-metrics
-  tag: v0.21.0
+  tag: v0.22.0
 
 # Секреты для доступа к реджисти с образом:
 imagePullSecrets:
